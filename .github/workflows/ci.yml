@@ -1,0 +1,23 @@
+name: Continuous Integration
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    name: Build the fap file
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the target
+        run: rustup target add thumbv7em-none-eabihf
+      - name: Build app
+        run: cargo +stable build --locked --release
+        env:
+          CARGO_INCREMENTAL: 0
+      - name: Add extension
+        run: mv target/thumbv7em-none-eabihf/release/flipper-my-project{,.fap}
+      - name: Archive the fap
+        uses: actions/upload-artifact@v4
+        with:
+          name: fap
+          path: target/thumbv7em-none-eabihf/release/flipper-my-project.fap

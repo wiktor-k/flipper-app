@@ -1,0 +1,25 @@
+#cargo-features = ["different-binary-name"]
+
+[package]
+name = "flipper-my-project"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88.0"
+license = "APL or MIT"
+publish = false
+autobins = false
+autoexamples = false
+autotests = false
+autobenches = false
+
+[[bin]]
+name = "flipper-my-project"
+#filename = "flipper-my-project.fap"
+bench = false
+test = false
+
+[dependencies]
+flipperzero = { version = "0.15.0" }
+flipperzero-alloc = { version = "0.15.0" }
+flipperzero-sys = { version = "0.15.0" }
+flipperzero-rt = { version = "0.15.0" }
